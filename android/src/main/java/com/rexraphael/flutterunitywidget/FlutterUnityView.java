@@ -50,6 +50,10 @@ public class FlutterUnityView implements PlatformView, MethodChannel.MethodCallH
                     @Override
                     public void onReady() {
                         result.success(true);
+
+                        if(UnityUtils.isUnityPaused()){
+                            UnityUtils.resume();
+                        }
                     }
                 });
 
@@ -89,7 +93,8 @@ public class FlutterUnityView implements PlatformView, MethodChannel.MethodCallH
     @Override
     public void dispose() {
         if (UnityUtils.isUnityReady()) {
-            UnityUtils.getPlayer().quit();
+            // UnityUtils.getPlayer().quit();
+            UnityUtils.pause();
         }
     }
 
